@@ -1,36 +1,43 @@
-import { Category } from 'src/category/entities/category.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinTable } from 'typeorm';
+import { Category } from 'src/category/entities/category.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 export enum postStatusEnum {
-  DRAW = 'Черновик',
-  PUBLISHED = 'Опубликован',
-  DELETED = 'Снят с публикации',
+    DRAW = 'Черновик',
+    PUBLISHED = 'Опубликован',
+    DELETED = 'Снят с публикации'
 }
-
 
 @Entity()
 export class Post {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @ApiProperty({
+        minimum: 1
+    })
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column()
-  title: string;
+    @ApiProperty()
+    @Column()
+    title: string;
 
-  @Column()
-  description: string;
+    @ApiProperty()
+    @Column()
+    description: string
 
-  @ManyToOne((type) => Category, (category) => category.posts, { eager: true })
-  category: Category;
+    @ManyToOne(type => Category, category => category.posts, {eager: true})
+    category: Category
 
-  @Column({
-    type: 'enum',
-    enum: postStatusEnum,
-    default: postStatusEnum.DRAW,
-  })
-  status: postStatusEnum;
+    @ApiProperty()
+    @Column({
+        type: 'enum',
+        enum: postStatusEnum,
+        default: postStatusEnum.DRAW
+    })
+    status: postStatusEnum
 
-  @Column({
-    type: 'datetime'
-  })
-  changed_at: Date;
+    @ApiProperty()
+    @Column({
+        type: 'datetime'
+    })
+    changed_at: Date
 }
