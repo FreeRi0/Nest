@@ -11,6 +11,7 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import {Post} from './posts/entities/post.entity';
 import { AuthModule } from './auth/auth.module';
+import { ModerationModule } from './moderation/moderation.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AuthModule } from './auth/auth.module';
     PostsModule,
     UsersModule,
     AuthModule,
+    ModerationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
